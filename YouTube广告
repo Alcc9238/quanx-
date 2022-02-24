@@ -1,14 +1,10 @@
-hostname = -redirector*.googlevideo.com,*.googlevideo.com,www.youtube.com,s.youtube.com,youtubei.googleapis.com
+hostname = *.googlevideo.com,*.youtube\.com
 
-# YouTube去广告
-ctier=(?!SH)[\w-] url 302 citer=A
-^https?:\/\/[\w-]+\.googlevideo\.com\/((?!(dclk_video_ads|videoplayback)).)+&(oad|ctier) url reject
-#^https://[\s\S]*\.googlevideo\.com/.*&(oad|ctier=(?!SH)[A-Z]) url reject-img
-^https?:\/\/(www|s)\.youtube\.com\/api\/stats\/ads url reject-200
-^https?:\/\/(www|s)\.youtube\.com\/(pagead|ptracking) url reject-200
-^https?:\/\/s\.youtube\.com\/api\/stats\/qoe?.*adformat= url reject-200
+#新版YouTube去广告
+# 油管去广告
+(^https?:\/\/(?!redirector)[\w-]+\.googlevideo\.com\/(?!dclk_video_ads).+)(ctier=L)(&.+) url 302 $1$4
+^https?:\/\/[\w-]+\.googlevideo\.com\/(?!(dclk_video_ads|videoplayback\?)).+(&oad|ctier) url reject
 
-
-
-
-(^https?:\/\/[\w-]+\.googlevideo\.com\/(?!dclk_video_ads）。+？）&ctier=L(&.+?),ctier,(.+) url 302 $1$2$3^https?:\/\/[\w-]+\.googlevideo\.com\/(?!(dclk_video_ads|videoplayback\?)).+&oad url 拒绝^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v\d\/player\/ad_break网址拒绝^https?:\/\/(www|s)\.youtube\.com\/api\/stats\/ads url 拒绝^https?:\/\/(www|s)\.youtube\.com\/(pagead|ptracking) URL 拒绝^https?:\/\/s\.youtube\.com\/api\/stats\/qoe\?adcontext url 拒绝
+^https?:\/\/(www|s)\.youtube\.com\/api\/stats\/ads url reject
+^https?:\/\/(www|s)\.youtube\.com\/(pagead|ptracking) url reject
+^https?:\/\/\s.youtube.com/api/stats/qoe?.*adformat= url reject
